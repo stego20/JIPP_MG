@@ -14,4 +14,6 @@ public class BasicTests : IClassFixture<WebApplicationFactory<Program>>
         var res = await client.GetAsync("/api/v1/health");
         Assert.Equal(HttpStatusCode.OK, res.StatusCode);
     }
+
+    
 }

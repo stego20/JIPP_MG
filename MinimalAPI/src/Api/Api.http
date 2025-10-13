@@ -3,4 +3,6 @@
 GET {{Api_HostAddress}}/weatherforecast/
 Accept: application/json
 
+POST http://localhost:5142/api/v1/user
+Content-Type: application/json
 ###
