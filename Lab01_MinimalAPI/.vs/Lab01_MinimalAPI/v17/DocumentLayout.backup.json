@@ -1,0 +1,95 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\HardPC\\source\\repos\\Lab01_MinimalAPI\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{17B0132C-F9DC-4FF7-86AC-150F5ABC9E71}|src\\Api\\Api.csproj|c:\\users\\hardpc\\source\\repos\\lab01_minimalapi\\src\\api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{17B0132C-F9DC-4FF7-86AC-150F5ABC9E71}|src\\Api\\Api.csproj|solutionrelative:src\\api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{17B0132C-F9DC-4FF7-86AC-150F5ABC9E71}|src\\Api\\Api.csproj|c:\\users\\hardpc\\source\\repos\\lab01_minimalapi\\src\\api\\api.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{17B0132C-F9DC-4FF7-86AC-150F5ABC9E71}|src\\Api\\Api.csproj|solutionrelative:src\\api\\api.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1AA765FF-DD1B-4106-B3CD-43F71E49CF99}|tests\\Api.Tests\\Api.Tests.csproj|c:\\users\\hardpc\\source\\repos\\lab01_minimalapi\\tests\\api.tests\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1AA765FF-DD1B-4106-B3CD-43F71E49CF99}|tests\\Api.Tests\\Api.Tests.csproj|solutionrelative:tests\\api.tests\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\dotnet\\sdk\\8.0.400\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.NET.TargetFrameworkInference.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Microsoft.NET.TargetFrameworkInference.targets",
+              "DocumentMoniker": "C:\\Program Files\\dotnet\\sdk\\8.0.400\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.NET.TargetFrameworkInference.targets",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Program Files\\dotnet\\sdk\\8.0.400\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.NET.TargetFrameworkInference.targets",
+              "ToolTip": "C:\\Program Files\\dotnet\\sdk\\8.0.400\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.NET.TargetFrameworkInference.targets",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Program Files\\dotnet\\sdk\\8.0.400\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.NET.TargetFrameworkInference.targets",
+              "ViewState": "AgIAAI8AAAAAAAAAAAAowKUAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
+              "WhenOpened": "2025-10-10T15:47:26.441Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UnitTest1.cs",
+              "DocumentMoniker": "C:\\Users\\HardPC\\source\\repos\\Lab01_MinimalAPI\\tests\\Api.Tests\\UnitTest1.cs",
+              "RelativeDocumentMoniker": "tests\\Api.Tests\\UnitTest1.cs",
+              "ToolTip": "C:\\Users\\HardPC\\source\\repos\\Lab01_MinimalAPI\\tests\\Api.Tests\\UnitTest1.cs",
+              "RelativeToolTip": "tests\\Api.Tests\\UnitTest1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-10T15:46:59.776Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Api.http",
+              "DocumentMoniker": "C:\\Users\\HardPC\\source\\repos\\Lab01_MinimalAPI\\src\\Api\\Api.http",
+              "RelativeDocumentMoniker": "src\\Api\\Api.http",
+              "ToolTip": "C:\\Users\\HardPC\\source\\repos\\Lab01_MinimalAPI\\src\\Api\\Api.http",
+              "RelativeToolTip": "src\\Api\\Api.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2025-10-10T15:31:13.373Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\HardPC\\source\\repos\\Lab01_MinimalAPI\\src\\Api\\Program.cs",
+              "RelativeDocumentMoniker": "src\\Api\\Program.cs",
+              "ToolTip": "C:\\Users\\HardPC\\source\\repos\\Lab01_MinimalAPI\\src\\Api\\Program.cs",
+              "RelativeToolTip": "src\\Api\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-10T15:31:00.15Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
