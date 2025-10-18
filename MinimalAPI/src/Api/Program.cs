@@ -27,28 +27,28 @@ app.MapGet("/hello/{name}", (string name) =>
 });
 
 
-app.MapGet("/api/v1/users", async (AppDbContext db) =>
+app.MapGet("/users", async (AppDbContext db) =>
 {
     var users = await db.Users.ToListAsync();
     return Results.Ok(users);
 }).WithOpenApi();
 
-app.MapGet("/api/v1/users/{id:int}", async (AppDbContext db, int id) =>
+app.MapGet("/users/{id:int}", async (AppDbContext db, int id) =>
 {
     var u = await db.Users.FindAsync(id);
     return u is null ? Results.NotFound() : Results.Ok(u);
 }).WithOpenApi();
 
-app.MapPost("/api/v1/users", async (AppDbContext db, UserDB dto) =>
+app.MapPost("/users", async (AppDbContext db, UserDB dto) =>
 {
     if (string.IsNullOrWhiteSpace(dto.Username)) return Results.BadRequest(new { error = "Name required" });
     var u = new User { Username = dto.Username, Email = dto.Email };
     db.Users.Add(u);
     await db.SaveChangesAsync();
-    return Results.Created($"/api/v1/users/{u.Id}", u);
+    return Results.Created($"/users/{u.Id}", u);
 }).WithOpenApi();
 
-app.MapPut("/api/v1/users/{id:int}", async (AppDbContext db, int id, UserDB dto) =>
+app.MapPut("/users/{id:int}", async (AppDbContext db, int id, UserDB dto) =>
 {
     var p = await db.Users.FindAsync(id);
     if (p is null) return Results.NotFound();
@@ -57,7 +57,7 @@ app.MapPut("/api/v1/users/{id:int}", async (AppDbContext db, int id, UserDB dto)
     return Results.NoContent();
 }).WithOpenApi();
 
-app.MapDelete("/api/v1/users/{id:int}", async (AppDbContext db, int id) =>
+app.MapDelete("/users/{id:int}", async (AppDbContext db, int id) =>
 {
     var p = await db.Users.FindAsync(id);
     if (p is null) return Results.NotFound();
