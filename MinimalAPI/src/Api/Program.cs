@@ -27,7 +27,7 @@ app.MapGet("/hello/{name}", (string name) =>
 });
 
 
-app.MapGet("/api/v1/user-list", async (AppDbContext db) =>
+app.MapGet("/api/v1/users", async (AppDbContext db) =>
 {
     var users = await db.Users.ToListAsync();
     return Results.Ok(users);
@@ -48,6 +48,23 @@ app.MapPost("/api/v1/user", async (AppDbContext db, UserDB dto) =>
     return Results.Created($"/api/v1/user/{u.Id}", u);
 }).WithOpenApi();
 
+app.MapPut("/api/v1/user/{id:int}", async (AppDbContext db, int id, UserDB dto) =>
+{
+    var p = await db.Users.FindAsync(id);
+    if (p is null) return Results.NotFound();
+    p.Username = dto.Username; p.Email = dto.Email;
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+}).WithOpenApi();
+
+app.MapDelete("/api/v1/user/{id:int}", async (AppDbContext db, int id) =>
+{
+    var p = await db.Users.FindAsync(id);
+    if (p is null) return Results.NotFound();
+    db.Users.Remove(p);
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+}).WithOpenApi();
 app.Run();
 
 public class User
