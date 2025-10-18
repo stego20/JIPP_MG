@@ -10,8 +10,8 @@ http://localhost:{port}/api/v1/health
 
 Tydzień 2
 dodanie nowego uzytkownika do bazy danych 
-Invoke-WebRequest -Uri "http://localhost:{port}/api/v1/users" -Method POST -ContentType "application/json" -Body '{"username":"{imie}","email":"{mail}"}'
-http://localhost:5142/users -lista wszystkich uzytkownikow
+Invoke-WebRequest -Uri "http://localhost:{port}/users" -Method POST -ContentType "application/json" -Body '{"username":"{imie}","email":"{mail}"}'
+http://localhost:{port}/users -lista wszystkich uzytkownikow
 
 Tydzień 3
 http://localhost:{port}/users/{id_usera} - pojedynczy uzytkownik
