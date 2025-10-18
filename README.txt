@@ -5,12 +5,20 @@ dotnet watch run --project src/Api/Api.csproj
 
 
 linki do mapgetów
+Tydzień 1
 http://localhost:{port}/hello/{imie}
 http://localhost:{port}/api/v1/health
-http://localhost:5142/api/v1/user-list -lista wszystkich uzytkownikow
-http://localhost:5142/api/v1/user/{id_usera} - pojedynczy uzytkownik
 
-
-
+Tydzień 2
 dodanie nowego uzytkownika do bazy danych 
 Invoke-WebRequest -Uri "http://localhost:{port}/api/v1/user" -Method POST -ContentType "application/json" -Body '{"username":"{imie}","email":"{mail}"}'
+http://localhost:5142/api/v1/users -lista wszystkich uzytkownikow
+
+Tydzień 3
+http://localhost:{port}/api/v1/user/{id_usera} - pojedynczy uzytkownik
+
+aktualizacja danych uzytkownika do bazy danych 
+Invoke-WebRequest -Uri "http://localhost:{port}/api/v1/user/{id_usera}" -Method PUT -ContentType "application/json" -Body '{"username":"{imie}","email":"{mail}"}'
+
+usuwanie uzytkownika z bazy danych
+Invoke-WebRequest -Uri "http://localhost:{port}/api/v1/user/{id_usera}" -Method DELETE -ContentType "application/json"
