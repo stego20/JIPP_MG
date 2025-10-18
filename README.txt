@@ -3,7 +3,7 @@ dotnet build
 dotnet test tests/Api.Tests/Api.Tests.csproj
 dotnet watch run --project src/Api/Api.csproj
 
-
+ w miejsca {} wstawic swoje wartosci
 Tydzień 1
 http://localhost:{port}/hello/{imie}
 http://localhost:{port}/api/v1/health
