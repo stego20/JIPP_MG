@@ -3,22 +3,21 @@ dotnet build
 dotnet test tests/Api.Tests/Api.Tests.csproj
 dotnet watch run --project src/Api/Api.csproj
 
-
-linki do mapgetów
+ w miejsca {} wstawic swoje wartosci
 Tydzień 1
 http://localhost:{port}/hello/{imie}
 http://localhost:{port}/api/v1/health
 
 Tydzień 2
 dodanie nowego uzytkownika do bazy danych 
-Invoke-WebRequest -Uri "http://localhost:{port}/api/v1/users" -Method POST -ContentType "application/json" -Body '{"username":"{imie}","email":"{mail}"}'
-http://localhost:5142/api/v1/users -lista wszystkich uzytkownikow
+Invoke-WebRequest -Uri "http://localhost:{port}/users" -Method POST -ContentType "application/json" -Body '{"username":"{imie}","email":"{mail}"}'
+http://localhost:{port}/users -lista wszystkich uzytkownikow
 
 Tydzień 3
-http://localhost:{port}/api/v1/users/{id_usera} - pojedynczy uzytkownik
+http://localhost:{port}/users/{id_usera} - pojedynczy uzytkownik
 
 aktualizacja danych uzytkownika do bazy danych 
-Invoke-WebRequest -Uri "http://localhost:{port}/api/v1/users/{id_usera}" -Method PUT -ContentType "application/json" -Body '{"username":"{imie}","email":"{mail}"}'
+Invoke-WebRequest -Uri "http://localhost:{port}/users/{id_usera}" -Method PUT -ContentType "application/json" -Body '{"username":"{imie}","email":"{mail}"}'
 
 usuwanie uzytkownika z bazy danych
-Invoke-WebRequest -Uri "http://localhost:{port}/api/v1/users/{id_usera}" -Method DELETE -ContentType "application/json"
+Invoke-WebRequest -Uri "http://localhost:{port}/users/{id_usera}" -Method DELETE -ContentType "application/json"
