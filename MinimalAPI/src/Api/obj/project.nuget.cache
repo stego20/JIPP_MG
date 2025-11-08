@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "ex5xxi2tXzM=",
+  "dgSpecHash": "QX9yA/Cy8kc=",
   "success": true,
   "projectFilePath": "C:\\Users\\HardPC\\source\\repos\\JIPP\\MinimalAPI\\src\\Api\\Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\HardPC\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\HardPC\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
+    "C:\\Users\\HardPC\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\HardPC\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\HardPC\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\9.0.9\\microsoft.aspnetcore.authentication.jwtbearer.9.0.9.nupkg.sha512",
     "C:\\Users\\HardPC\\.nuget\\packages\\microsoft.aspnetcore.diagnostics.entityframeworkcore\\9.0.9\\microsoft.aspnetcore.diagnostics.entityframeworkcore.9.0.9.nupkg.sha512",

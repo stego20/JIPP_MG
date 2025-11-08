@@ -330,3 +330,4 @@ C:\Users\HardPC\source\repos\JIPP\MinimalAPI\src\Api\obj\Debug\net9.0\ref\Api.dl
 C:\Users\HardPC\source\repos\JIPP\MinimalAPI\src\Api\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\HardPC\source\repos\JIPP\MinimalAPI\src\Api\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\HardPC\source\repos\JIPP\MinimalAPI\src\Api\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\HardPC\source\repos\JIPP\MinimalAPI\src\Api\bin\Debug\net9.0\BCrypt.Net-Next.dll
