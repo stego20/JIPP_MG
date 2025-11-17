@@ -21,8 +21,6 @@ builder.Services.AddSwaggerGen(options =>
         Title = "Api",
         Version = "v1"
     });
-
-    // 🔒 Dodajemy obsługę autoryzacji JWT
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",
@@ -101,15 +99,21 @@ app.MapGet("/users/{id:int}", async (AppDbContext db, int id) =>
 //Rejestracja uzytkownika
 app.MapPost("/users", async (AppDbContext db, UserDB dto) =>
 {
-    if (string.IsNullOrWhiteSpace(dto.Username) || string.IsNullOrWhiteSpace(dto.Password))
-        return Results.BadRequest(new { error = "Username and password required" });
-    // Hash password before storing
-    var hash = BCrypt.Net.BCrypt.HashPassword(dto.Password);
-    var u = new User { Username = dto.Username, Email = dto.Email, PasswordHash = hash };
-    db.Users.Add(u);
-    await db.SaveChangesAsync();
-    return Results.NoContent();
-
+    try {
+        if (string.IsNullOrWhiteSpace(dto.Username) || string.IsNullOrWhiteSpace(dto.Password)) {
+            Console.Error.WriteLine($"[POST /users] BadRequest: Username and password required");
+            return Results.BadRequest(new { error = "Username and password required" });
+        }
+        // Hash password before storing
+        var hash = BCrypt.Net.BCrypt.HashPassword(dto.Password);
+        var u = new User { Username = dto.Username, Email = dto.Email, PasswordHash = hash };
+        db.Users.Add(u);
+        await db.SaveChangesAsync();
+        return Results.NoContent();
+    } catch (Exception ex) {
+        Console.Error.WriteLine($"[POST /users] Exception: {ex.Message}\n{ex.StackTrace}");
+        return Results.Problem("Internal server error");
+    }
 }).WithOpenApi();
 
 app.MapPut("/users/{id:int}", async (AppDbContext db, int id, UserDB dto) =>
@@ -132,57 +136,79 @@ app.MapDelete("/users/{id:int}", async (AppDbContext db, int id) =>
 
 app.MapPost("/tasks", async (AppDbContext db, TodoTaskCreate dto) =>
 {
-    if (string.IsNullOrWhiteSpace(dto.Title)) return Results.BadRequest(new { error = "Title required" });
-    var user = await db.Users.FindAsync(dto.UserId);
-    if (user is null) return Results.BadRequest(new { error = "User not found" });
-    var task = new TodoTask { Title = dto.Title, Description = dto.Description ?? string.Empty, UserId = dto.UserId, IsCompleted = false };
-    db.TodoTasks.Add(task);
-    await db.SaveChangesAsync();
-    return Results.Created($"/tasks/{task.Id}", task);
-}).WithOpenApi();
+    try {
+        if (string.IsNullOrWhiteSpace(dto.Title)) {
+            Console.Error.WriteLine($"[POST /tasks] BadRequest: Title required");
+            return Results.BadRequest(new { error = "Title required" });
+        }
+        var user = await db.Users.FindAsync(dto.UserId);
+        if (user is null) {
+            Console.Error.WriteLine($"[POST /tasks] BadRequest: User not found");
+            return Results.BadRequest(new { error = "User not found" });
+        }
+        var task = new TodoTask { Title = dto.Title, Description = dto.Description ?? string.Empty, UserId = dto.UserId, IsCompleted = false };
+        db.TodoTasks.Add(task);
+        await db.SaveChangesAsync();
+        return Results.Created($"/tasks/{task.Id}", task);
+    } catch (Exception ex) {
+        Console.Error.WriteLine($"[POST /tasks] Exception: {ex.Message}\n{ex.StackTrace}");
+        return Results.Problem("Internal server error");
+    }
+}).RequireAuthorization().WithOpenApi();
 app.MapGet("/users/{id:int}/tasks", async (AppDbContext db, int id) =>
 {
-    var userExists = await db.Users.AnyAsync(u => u.Id == id);
-    if (!userExists) return Results.NotFound();
-
-    var tasks = await db.TodoTasks.Where(t => t.UserId == id).ToListAsync();
-    return Results.Ok(tasks);
+    try {
+        var userExists = await db.Users.AnyAsync(u => u.Id == id);
+        if (!userExists) {
+            Console.Error.WriteLine($"[GET /users/{id}/tasks] NotFound: User not found");
+            return Results.NotFound();
+        }
+        var tasks = await db.TodoTasks.Where(t => t.UserId == id).ToListAsync();
+        return Results.Ok(tasks);
+    } catch (Exception ex) {
+        Console.Error.WriteLine($"[GET /users/{id}/tasks] Exception: {ex.Message}\n{ex.StackTrace}");
+        return Results.Problem("Internal server error");
+    }
 }).RequireAuthorization().WithOpenApi();
 
 
 
 app.MapPost("/login", async (AppDbContext db, UserLogin dto, IConfiguration config) =>
 {
-    var user = await db.Users.FirstOrDefaultAsync(u => u.Username == dto.Username);
-    if (user is null) return Results.BadRequest(new { error = "Invalid username or password" });
-
-    // Verify password
-    if (!BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash))
-        return Results.BadRequest(new { error = "Invalid username or password" });
-
-    // Generate JWT
-    var jwtSettings = config.GetSection("Jwt");
-    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]!));
-    var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-    var claims = new[]
-    {
-        new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-        new Claim(JwtRegisteredClaimNames.UniqueName, user.Username),
-        new Claim(JwtRegisteredClaimNames.Email, user.Email),
-    };
-
-    var token = new JwtSecurityToken(
-        issuer: jwtSettings["Issuer"],
-        audience: jwtSettings["Audience"],
-        claims: claims,
-        expires: DateTime.UtcNow.AddHours(2),
-        signingCredentials: creds
-    );
-
-    var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
-
-    return Results.Ok(new { token = tokenString });
+    try {
+        var user = await db.Users.FirstOrDefaultAsync(u => u.Username == dto.Username);
+        if (user is null) {
+            Console.Error.WriteLine($"[POST /login] BadRequest: Invalid username or password");
+            return Results.BadRequest(new { error = "Invalid username or password" });
+        }
+        // Verify password
+        if (!BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash)) {
+            Console.Error.WriteLine($"[POST /login] BadRequest: Invalid username or password");
+            return Results.BadRequest(new { error = "Invalid username or password" });
+        }
+        // Generate JWT
+        var jwtSettings = config.GetSection("Jwt");
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]!));
+        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+        var claims = new[]
+        {
+            new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+            new Claim(JwtRegisteredClaimNames.UniqueName, user.Username),
+            new Claim(JwtRegisteredClaimNames.Email, user.Email),
+        };
+        var token = new JwtSecurityToken(
+            issuer: jwtSettings["Issuer"],
+            audience: jwtSettings["Audience"],
+            claims: claims,
+            expires: DateTime.UtcNow.AddHours(2),
+            signingCredentials: creds
+        );
+        var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
+        return Results.Ok(new { token = tokenString });
+    } catch (Exception ex) {
+        Console.Error.WriteLine($"[POST /login] Exception: {ex.Message}\n{ex.StackTrace}");
+        return Results.Problem("Internal server error");
+    }
 }).WithOpenApi();
 
 app.Run();
