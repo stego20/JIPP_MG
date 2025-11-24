@@ -9,8 +9,14 @@ using BCrypt.Net;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.OpenApi.Models;
+using System.ComponentModel.DataAnnotations;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.File("log.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
+builder.Host.UseSerilog();
 
 builder.Services.AddAuthorization();
 builder.Services.AddEndpointsApiExplorer();
@@ -53,7 +59,6 @@ builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =
 var conn = builder.Configuration.GetConnectionString("Sql");
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(conn));
-// JWT
 var jwtKey = builder.Configuration["Jwt:Key"] ?? "dev_key_change_me";
 var issuer = builder.Configuration["Jwt:Issuer"];
 var audience = builder.Configuration["Jwt:Audience"];
@@ -96,7 +101,6 @@ app.MapGet("/users/{id:int}", async (AppDbContext db, int id) =>
     var u = await db.Users.FindAsync(id);
     return u is null ? Results.NotFound() : Results.Ok(u);
 }).RequireAuthorization().WithOpenApi();
-//Rejestracja uzytkownika
 app.MapPost("/users", async (AppDbContext db, UserDB dto) =>
 {
     try {
@@ -104,7 +108,6 @@ app.MapPost("/users", async (AppDbContext db, UserDB dto) =>
             Console.Error.WriteLine($"[POST /users] BadRequest: Username and password required");
             return Results.BadRequest(new { error = "Username and password required" });
         }
-        // Hash password before storing
         var hash = BCrypt.Net.BCrypt.HashPassword(dto.Password);
         var u = new User { Username = dto.Username, Email = dto.Email, PasswordHash = hash };
         db.Users.Add(u);
@@ -181,12 +184,10 @@ app.MapPost("/login", async (AppDbContext db, UserLogin dto, IConfiguration conf
             Console.Error.WriteLine($"[POST /login] BadRequest: Invalid username or password");
             return Results.BadRequest(new { error = "Invalid username or password" });
         }
-        // Verify password
         if (!BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash)) {
             Console.Error.WriteLine($"[POST /login] BadRequest: Invalid username or password");
             return Results.BadRequest(new { error = "Invalid username or password" });
         }
-        // Generate JWT
         var jwtSettings = config.GetSection("Jwt");
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]!));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -217,6 +218,7 @@ public class User
 {
     public int Id { get; set; }
     public string Username { get; set; } = string.Empty;
+    [EmailAddress]
     public string Email { get; set; } = string.Empty;
     public string? PasswordHash { get; set; }
     public List<TodoTask> Tasks { get; set; } = new();
