@@ -331,3 +331,14 @@ C:\Users\HardPC\source\repos\JIPP\MinimalAPI\src\Api\bin\Debug\net9.0\Swashbuckl
 C:\Users\HardPC\source\repos\JIPP\MinimalAPI\src\Api\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\HardPC\source\repos\JIPP\MinimalAPI\src\Api\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\HardPC\source\repos\JIPP\MinimalAPI\src\Api\bin\Debug\net9.0\BCrypt.Net-Next.dll
+C:\Users\HardPC\source\repos\JIPP\MinimalAPI\src\Api\bin\Debug\net9.0\AutoMapper.dll
+C:\Users\HardPC\source\repos\JIPP\MinimalAPI\src\Api\bin\Debug\net9.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\HardPC\source\repos\JIPP\MinimalAPI\src\Api\bin\Debug\net9.0\Serilog.dll
+C:\Users\HardPC\source\repos\JIPP\MinimalAPI\src\Api\bin\Debug\net9.0\Serilog.AspNetCore.dll
+C:\Users\HardPC\source\repos\JIPP\MinimalAPI\src\Api\bin\Debug\net9.0\Serilog.Extensions.Hosting.dll
+C:\Users\HardPC\source\repos\JIPP\MinimalAPI\src\Api\bin\Debug\net9.0\Serilog.Extensions.Logging.dll
+C:\Users\HardPC\source\repos\JIPP\MinimalAPI\src\Api\bin\Debug\net9.0\Serilog.Formatting.Compact.dll
+C:\Users\HardPC\source\repos\JIPP\MinimalAPI\src\Api\bin\Debug\net9.0\Serilog.Settings.Configuration.dll
+C:\Users\HardPC\source\repos\JIPP\MinimalAPI\src\Api\bin\Debug\net9.0\Serilog.Sinks.Console.dll
+C:\Users\HardPC\source\repos\JIPP\MinimalAPI\src\Api\bin\Debug\net9.0\Serilog.Sinks.Debug.dll
+C:\Users\HardPC\source\repos\JIPP\MinimalAPI\src\Api\bin\Debug\net9.0\Serilog.Sinks.File.dll

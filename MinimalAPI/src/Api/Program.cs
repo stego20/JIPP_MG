@@ -11,6 +11,7 @@ using System.Security.Claims;
 using Microsoft.OpenApi.Models;
 using System.ComponentModel.DataAnnotations;
 using Serilog;
+using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 Log.Logger = new LoggerConfiguration()
@@ -76,6 +77,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 builder.Services.AddAuthorization();
+// AutoMapper configuration
+builder.Services.AddAutoMapper(typeof(Program));
 var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
@@ -90,16 +93,19 @@ app.MapGet("/hello/{name}", (string name) =>
 });
 
 
-app.MapGet("/users", async (AppDbContext db) =>
+app.MapGet("/users", async (AppDbContext db, IMapper mapper) =>
 {
     var users = await db.Users.ToListAsync();
-    return Results.Ok(users);
+    var dtos = mapper.Map<List<UserDto>>(users);
+    return Results.Ok(dtos);
 }).WithOpenApi();
 
-app.MapGet("/users/{id:int}", async (AppDbContext db, int id) =>
+app.MapGet("/users/{id:int}", async (AppDbContext db, int id, IMapper mapper) =>
 {
     var u = await db.Users.FindAsync(id);
-    return u is null ? Results.NotFound() : Results.Ok(u);
+    if (u is null) return Results.NotFound();
+    var dto = mapper.Map<UserDto>(u);
+    return Results.Ok(dto);
 }).RequireAuthorization().WithOpenApi();
 app.MapPost("/users", async (AppDbContext db, UserDB dto) =>
 {
@@ -109,7 +115,7 @@ app.MapPost("/users", async (AppDbContext db, UserDB dto) =>
             return Results.BadRequest(new { error = "Username and password required" });
         }
         var hash = BCrypt.Net.BCrypt.HashPassword(dto.Password);
-        var u = new User { Username = dto.Username, Email = dto.Email, PasswordHash = hash };
+        var u = new User { Username = dto.Username, Email = dto.Email, PasswordHash = hash, Created = DateTime.UtcNow };
         db.Users.Add(u);
         await db.SaveChangesAsync();
         return Results.NoContent();
@@ -212,6 +218,18 @@ app.MapPost("/login", async (AppDbContext db, UserLogin dto, IConfiguration conf
     }
 }).WithOpenApi();
 
+app.MapGet("/reports/new-users", async (AppDbContext db, DateTime? from, DateTime? to, IMapper mapper) =>
+{
+    // Default: last 7 days if not provided
+    var fromDate = from ?? DateTime.UtcNow.AddDays(-7);
+    var toDate = to ?? DateTime.UtcNow;
+    var users = await db.Users
+        .Where(u => EF.Property<DateTime>(u, "Created") >= fromDate && EF.Property<DateTime>(u, "Created") <= toDate)
+        .ToListAsync();
+    var dtos = mapper.Map<List<UserDto>>(users);
+    return Results.Ok(new { from = fromDate, to = toDate, count = dtos.Count, users = dtos });
+}).WithOpenApi();
+
 app.Run();
 
 public class User
@@ -221,6 +239,7 @@ public class User
     [EmailAddress]
     public string Email { get; set; } = string.Empty;
     public string? PasswordHash { get; set; }
+    public DateTime Created { get; set; } = DateTime.UtcNow;
     public List<TodoTask> Tasks { get; set; } = new();
 }
 
@@ -240,6 +259,7 @@ public class AppDbContext : DbContext
             e.Property(x => x.Username).IsRequired().HasMaxLength(100);
             e.Property(x => x.Email).IsRequired().HasMaxLength(200);
             e.Property(x => x.PasswordHash).HasMaxLength(1000);
+            e.Property(x => x.Created).IsRequired();
         });
 
         modelBuilder.Entity<TodoTask>(e =>
@@ -274,3 +294,12 @@ public class TodoTask
 
 public record TodoTaskCreate(string Title, string? Description, int UserId);
 public record UserLogin(string Username, string Password);
+public record UserDto(int Id, string Username, string Email);
+
+public class MappingProfile : AutoMapper.Profile
+{
+    public MappingProfile()
+    {
+        CreateMap<User, UserDto>();
+    }
+}

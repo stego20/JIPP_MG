@@ -1,0 +1,14 @@
+2025-12-02 14:26:27.704 +01:00 [INF] User profile is available. Using 'C:\Users\HardPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-12-02 14:26:27.811 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost/api/v1/health - null null
+2025-12-02 14:26:27.871 +01:00 [INF] Executing endpoint 'HTTP: GET /api/v1/health'
+2025-12-02 14:26:27.874 +01:00 [INF] Setting HTTP status code 200.
+2025-12-02 14:26:27.875 +01:00 [INF] Writing value of type '<>f__AnonymousType2`1' as Json.
+2025-12-02 14:26:27.880 +01:00 [INF] Executed endpoint 'HTTP: GET /api/v1/health'
+2025-12-02 14:26:27.881 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost/api/v1/health - 200 null application/json; charset=utf-8 71.1464ms
+2025-12-02 14:26:42.962 +01:00 [INF] User profile is available. Using 'C:\Users\HardPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-12-02 14:26:43.064 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost/api/v1/health - null null
+2025-12-02 14:26:43.116 +01:00 [INF] Executing endpoint 'HTTP: GET /api/v1/health'
+2025-12-02 14:26:43.118 +01:00 [INF] Setting HTTP status code 200.
+2025-12-02 14:26:43.119 +01:00 [INF] Writing value of type '<>f__AnonymousType2`1' as Json.
+2025-12-02 14:26:43.123 +01:00 [INF] Executed endpoint 'HTTP: GET /api/v1/health'
+2025-12-02 14:26:43.124 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost/api/v1/health - 200 null application/json; charset=utf-8 61.2023ms
