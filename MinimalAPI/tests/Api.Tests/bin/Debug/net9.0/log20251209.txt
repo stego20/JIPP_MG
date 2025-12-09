@@ -1,0 +1,49 @@
+2025-12-09 17:31:07.596 +01:00 [INF] User profile is available. Using 'C:\Users\HardPC\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-12-09 17:31:07.758 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost/api/v1/health - null null
+2025-12-09 17:31:07.811 +01:00 [INF] Executing endpoint 'HTTP: GET /api/v1/health'
+2025-12-09 17:31:07.813 +01:00 [INF] Setting HTTP status code 200.
+2025-12-09 17:31:07.814 +01:00 [INF] Writing value of type '<>f__AnonymousType2`1' as Json.
+2025-12-09 17:31:07.818 +01:00 [INF] Executed endpoint 'HTTP: GET /api/v1/health'
+2025-12-09 17:31:07.819 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost/api/v1/health - 200 null application/json; charset=utf-8 61.7576ms
+2025-12-09 17:31:07.832 +01:00 [INF] Request starting HTTP/1.1 POST http://localhost/users - application/json; charset=utf-8 78
+2025-12-09 17:31:07.834 +01:00 [INF] Executing endpoint 'HTTP: POST /users'
+2025-12-09 17:31:09.755 +01:00 [INF] Executed DbCommand (24ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Size = 200), @p2='?' (Size = 1000), @p3='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Users] ([Created], [Email], [PasswordHash], [Username])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+2025-12-09 17:31:09.779 +01:00 [INF] Setting HTTP status code 204.
+2025-12-09 17:31:09.780 +01:00 [INF] Executed endpoint 'HTTP: POST /users'
+2025-12-09 17:31:09.782 +01:00 [INF] Request starting HTTP/1.1 POST http://localhost/login - application/json; charset=utf-8 46
+2025-12-09 17:31:09.784 +01:00 [INF] Executing endpoint 'HTTP: POST /login'
+2025-12-09 17:31:09.785 +01:00 [INF] Request finished HTTP/1.1 POST http://localhost/users - 204 null null 1952.965ms
+2025-12-09 17:31:09.966 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[@__dto_Username_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Created], [u].[Email], [u].[PasswordHash], [u].[Username]
+FROM [Users] AS [u]
+WHERE [u].[Username] = @__dto_Username_0
+2025-12-09 17:31:10.150 +01:00 [INF] Setting HTTP status code 200.
+2025-12-09 17:31:10.151 +01:00 [INF] Writing value of type '<>f__AnonymousType4`1' as Json.
+2025-12-09 17:31:10.152 +01:00 [INF] Executed endpoint 'HTTP: POST /login'
+2025-12-09 17:31:10.152 +01:00 [INF] Request finished HTTP/1.1 POST http://localhost/login - 200 null application/json; charset=utf-8 370.1007ms
+2025-12-09 17:31:10.153 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost/users/1 - null null
+2025-12-09 17:31:10.175 +01:00 [INF] Executing endpoint 'HTTP: GET /users/{id:int}'
+2025-12-09 17:31:10.243 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Created], [u].[Email], [u].[PasswordHash], [u].[Username]
+FROM [Users] AS [u]
+WHERE [u].[Id] = @__p_0
+2025-12-09 17:31:10.247 +01:00 [INF] Setting HTTP status code 200.
+2025-12-09 17:31:10.248 +01:00 [INF] Writing value of type 'UserDto' as Json.
+2025-12-09 17:31:10.248 +01:00 [INF] Executed endpoint 'HTTP: GET /users/{id:int}'
+2025-12-09 17:31:10.248 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost/users/1 - 200 null application/json; charset=utf-8 95.37ms
+2025-12-09 17:31:10.250 +01:00 [INF] Request starting HTTP/1.1 POST http://localhost/users - application/json; charset=utf-8 76
+2025-12-09 17:31:10.250 +01:00 [INF] Executing endpoint 'HTTP: POST /users'
+2025-12-09 17:31:10.413 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Size = 200), @p2='?' (Size = 1000), @p3='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Users] ([Created], [Email], [PasswordHash], [Username])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+2025-12-09 17:31:10.413 +01:00 [INF] Setting HTTP status code 204.
+2025-12-09 17:31:10.413 +01:00 [INF] Executed endpoint 'HTTP: POST /users'
+2025-12-09 17:31:10.414 +01:00 [INF] Request finished HTTP/1.1 POST http://localhost/users - 204 null null 163.8671ms
