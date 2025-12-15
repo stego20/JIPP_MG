@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "xZv+yq7hLqw=",
+  "dgSpecHash": "NnMmSJqak7M=",
   "success": true,
   "projectFilePath": "C:\\Users\\HardPC\\source\\repos\\JIPP\\MinimalAPI\\tests\\Api.Tests\\Api.Tests.csproj",
   "expectedPackageFiles": [
@@ -13,6 +13,7 @@
     "C:\\Users\\HardPC\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\9.0.9\\microsoft.aspnetcore.authentication.jwtbearer.9.0.9.nupkg.sha512",
     "C:\\Users\\HardPC\\.nuget\\packages\\microsoft.aspnetcore.diagnostics.entityframeworkcore\\9.0.9\\microsoft.aspnetcore.diagnostics.entityframeworkcore.9.0.9.nupkg.sha512",
     "C:\\Users\\HardPC\\.nuget\\packages\\microsoft.aspnetcore.mvc.testing\\9.0.9\\microsoft.aspnetcore.mvc.testing.9.0.9.nupkg.sha512",
+    "C:\\Users\\HardPC\\.nuget\\packages\\microsoft.aspnetcore.mvc.versioning\\5.1.0\\microsoft.aspnetcore.mvc.versioning.5.1.0.nupkg.sha512",
     "C:\\Users\\HardPC\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.9\\microsoft.aspnetcore.openapi.9.0.9.nupkg.sha512",
     "C:\\Users\\HardPC\\.nuget\\packages\\microsoft.aspnetcore.testhost\\9.0.9\\microsoft.aspnetcore.testhost.9.0.9.nupkg.sha512",
     "C:\\Users\\HardPC\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",

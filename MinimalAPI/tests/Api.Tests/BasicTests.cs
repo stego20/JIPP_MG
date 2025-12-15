@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Xunit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
 public class BasicTests : IClassFixture<WebApplicationFactory<Program>>
 {
     private readonly WebApplicationFactory<Program> _factory;
@@ -44,6 +45,16 @@ public class BasicTests : IClassFixture<WebApplicationFactory<Program>>
         client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
         var protectedRes = await client.GetAsync("/users/1");
         Assert.True(protectedRes.StatusCode == HttpStatusCode.OK || protectedRes.StatusCode == HttpStatusCode.NotFound);
+    }
+
+    [Fact]
+    public async Task VersionedHello_ReturnsOk()
+    {
+        var client = _factory.CreateClient();
+        var res = await client.GetAsync("/v1/hello/testver");
+        Assert.Equal(HttpStatusCode.OK, res.StatusCode);
+        var content = await res.Content.ReadAsStringAsync();
+        Assert.Contains("testver", content);
     }
 
     // Seeding users in DbContext for integration tests

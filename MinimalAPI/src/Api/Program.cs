@@ -12,6 +12,8 @@ using Microsoft.OpenApi.Models;
 using System.ComponentModel.DataAnnotations;
 using Serilog;
 using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Versioning;
 
 var builder = WebApplication.CreateBuilder(args);
 Log.Logger = new LoggerConfiguration()
@@ -79,6 +81,16 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddAuthorization();
 // AutoMapper configuration
 builder.Services.AddAutoMapper(typeof(Program));
+
+// Add API versioning
+builder.Services.AddApiVersioning(options =>
+{
+    options.DefaultApiVersion = new ApiVersion(1, 0);
+    options.AssumeDefaultVersionWhenUnspecified = true;
+    options.ReportApiVersions = true;
+    options.ApiVersionReader = new UrlSegmentApiVersionReader();
+});
+
 var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
@@ -229,6 +241,9 @@ app.MapGet("/reports/new-users", async (AppDbContext db, DateTime? from, DateTim
     var dtos = mapper.Map<List<UserDto>>(users);
     return Results.Ok(new { from = fromDate, to = toDate, count = dtos.Count, users = dtos });
 }).WithOpenApi();
+
+// Example versioned endpoint
+app.MapGet("/v{version:apiVersion}/hello/{name}", (string name) => Results.Ok($"Hello, {name}!")).WithMetadata(new ApiVersionAttribute("1.0"));
 
 app.Run();
 

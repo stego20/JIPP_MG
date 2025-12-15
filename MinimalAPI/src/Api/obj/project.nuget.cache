@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ZHve1DeMQ5E=",
+  "dgSpecHash": "Td7vK61+A04=",
   "success": true,
   "projectFilePath": "C:\\Users\\HardPC\\source\\repos\\JIPP\\MinimalAPI\\src\\Api\\Api.csproj",
   "expectedPackageFiles": [
@@ -12,6 +12,7 @@
     "C:\\Users\\HardPC\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\HardPC\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\9.0.9\\microsoft.aspnetcore.authentication.jwtbearer.9.0.9.nupkg.sha512",
     "C:\\Users\\HardPC\\.nuget\\packages\\microsoft.aspnetcore.diagnostics.entityframeworkcore\\9.0.9\\microsoft.aspnetcore.diagnostics.entityframeworkcore.9.0.9.nupkg.sha512",
+    "C:\\Users\\HardPC\\.nuget\\packages\\microsoft.aspnetcore.mvc.versioning\\5.1.0\\microsoft.aspnetcore.mvc.versioning.5.1.0.nupkg.sha512",
     "C:\\Users\\HardPC\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.9\\microsoft.aspnetcore.openapi.9.0.9.nupkg.sha512",
     "C:\\Users\\HardPC\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\7.0.0\\microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",
     "C:\\Users\\HardPC\\.nuget\\packages\\microsoft.build.framework\\17.8.3\\microsoft.build.framework.17.8.3.nupkg.sha512",
